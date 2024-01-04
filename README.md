@@ -1,12 +1,14 @@
 # Utilizing VBA Scripting to Analyze Multiple Years of Stock Data
 
+
 ## Overview ##
 
-The objective of this project is to create a Visual Basic for Applications (VBA) script in Microsoft Excel that loops through three consecutive years of data for approximately 3,000 stocks and outputs summarizing information for each individual stock. The initial stock data is organized into five main categories: open price, close price, highest intraday price, lowest intraday price, and volume traded. This information is recorded for each individual stock on every single trading day throughout the course of a calendar year. By using VBA, this data is analyzed to determine the annual variation of each individual stock, reported as both a monetary change and corresponding percent change, along with the total volume of each stock that was traded during the course of the year. This condensed data is further analyzed to ascertain the specific stocks that achieved the greatest percent increase, greatest percent decrease, and greatest total volume traded during each calendar year. The application of VBA in this situation allowed for all of the data processing to be automated, preventing the need for a repetitive approach to the more than 750,000 rows of information contained in each worksheet.
+The objective of this project is to create a Visual Basic for Applications (VBA) script in Microsoft Excel that loops through three consecutive years of data for approximately 3,000 stocks and outputs summarizing information for each individual stock. The initial stock data is organized into five main categories: open price, close price, highest intraday price, lowest intraday price, and volume traded. This information is recorded for each individual stock on every single trading day throughout the course of a calendar year. By using VBA, this data is analyzed to determine the annual variation of each individual stock, reported as both a monetary change and corresponding percent change, along with the total volume of each stock that was traded during the course of the year. This condensed data is then further analyzed to ascertain the specific stocks that achieved the greatest percent increase, greatest percent decrease, and greatest total volume traded during each calendar year. The application of VBA in this situation allowed for all of the data processing to be automated, preventing the need for a repetitive approach to the more than 750,000 rows of raw stock data contained in each worksheet.
+
 
 ## Process ##
 
-The stock data that served as the basis of this project is organized into an excel workbook titled "Multiple Year Stock Data," which contains a seperate worksheet for each calendar year (2018, 2019, and 2020) under consideration. This particular arrangement necessitated a VBA script that would loop through each worksheet in the workbook and accomplish both levels of data analysis. To achieve this goal, four separate Sub procedures were created in VBA:
+The stock data that served as the basis of this project is organized into an excel workbook titled "Multiple Year Stock Data," which contains a seperate worksheet for each calendar year (2018, 2019, and 2020) under consideration. This particular arrangement necessitates a VBA script that loops through each worksheet in the workbook and accomplishes both levels of data analysis. To achieve this goal, four separate Sub procedures were created in VBA:
 
 1) Sub StockRawDataAnalysis()
     * This Sub procedure will summarize the initial raw stock data and output the following information:
@@ -40,12 +42,12 @@ The stock data that served as the basis of this project is organized into an exc
                         * TotalVolume now has the final value for the total stock volume traded. 
                     * Summarized data that has been obtained will be printed to the DataOutput location.
                     * All of the variables will be reset in preparation for stock ticker identity change.
-                    * Row will be added to the DataOutput location in preparation for stock ticker identity change.
+                    * New row will be added to the DataOutput location in preparation for stock ticker identity change.
                 * If there is no change in stock ticker identity, then the stock volume traded will continually be added to TotalVolume as the loop progresses.
         4) The For Loop will end on final row of raw stock data and this process will start over again in the next worksheet.               
 
 2) Sub StockCondensedDataAnalysis()
-    * This Sub procedure will evaluate the summarized stock data obtained in the previous Sub procedure and output the following highlighting information:
+    * This Sub procedure will evaluate the summarized stock data obtained in the previous Sub procedure and output the following information:
         * Greatest Percent Increase
             * Stock ticker that has achieved the largest positive Yearly Percent Change amongst all stocks during the calendar year under consideration.
         * Greatest Percent Decrease
@@ -55,16 +57,16 @@ The stock data that served as the basis of this project is organized into an exc
     * Basic structure of Sub procedure:
         1) For Loop allows Sub procedure to run through every worksheet in the Multiple Year Stock Data workbook.
         2) DataOutput variable is defined.
-            * Directs all stock highlight information determined by this Sub procedure to a specific location in the worksheet.
+            * Directs all stock information determined by this Sub procedure to a specific location in the worksheet.
         3) Variables used to determine Greatest Percent Increase / Greatest Percent Decrease / Greatest Total Volume are defined and subsequently reset in preparation for the upcoming For Loop.
         4) Variables used to determine the stock ticker identities that correspond to the Greatest Percent Increase / Greatest Percent Decrease / Greatest Total Volume are defined and subsequently reset in preparation for the upcoming For Loop.
         5) For Loop created so that each row of summarized stock data will be evaluated one at a time, where:
-            * Variables CurrentPercent, CurrentVolume, and CurrentTicker will hold values for the Yearly Percent Change, Total Stock Volume, and stock ticker identity in the specific row of summarized stock data that the For Loop is evaluating.
+            * Variables CurrentPercent, CurrentVolume, and CurrentTicker will hold values for the Yearly Percent Change, Total Stock Volume, and stock ticker identity in each specific row of summarized stock data that the For Loop is evaluating.
                 * By sequentially holding these three data points in every single row of summarized stock data, it will be possible to continously search for the Greatest Percent Increase / Greatest Percent Decrease / Greatest Total Volume one row at a time.
             * Variables GreatestIncrease, GreatestDecrease, and GreatestVolume will start storing values as the For Loop progresses. The variables StockTickerIncrease, StockTickerDecrease, StockTickerVolume will start storing the stock ticker identities that correspond to the values stored in GreatestIncrease, GreatestDecrease, and GreatestVolume.
                 *  Whenever CurrentPercent is greater than GreatestIncrease, then GreatestIncrease will store CurrentPercent as its new value. Also, the variable StockTickerIncrease will store CurrentTicker as its new stock ticker identity.
-            * Whenever CurrentPercent is less than GreatestDecrease, then GreatestDecrease will store CurrentPercent as its new value. Also, the variable StockTickerDecrease will store CurrentTicker as its new stock ticker identity.
-            * Whenever CurrentVolume is greater than GreatestVolume, then GreatestVolume will store CurrentVolume as its new value. Also, the variable StockTickerVolume will store CurrentTicker as its new stock ticker identity.
+                * Whenever CurrentPercent is less than GreatestDecrease, then GreatestDecrease will store CurrentPercent as its new value. Also, the variable StockTickerDecrease will store CurrentTicker as its new stock ticker identity.
+                * Whenever CurrentVolume is greater than GreatestVolume, then GreatestVolume will store CurrentVolume as its new value. Also, the variable StockTickerVolume will store CurrentTicker as its new stock ticker identity.
          6) After all rows of the summarized stock data have been analyzed, the updated and finalized variables from step 5 will be printed to the DataOutput location.
          7) This process will start over again in the next worksheet.
 
@@ -72,10 +74,10 @@ The stock data that served as the basis of this project is organized into an exc
     * This Sub procedure will format all of the data found in each worksheet so that the overall workbook looks visually appealing.
     * Basic structure of Sub procedure:
         1) For Loop allows Sub procedure to run through every worksheet in the Multiple Year Stock Data workbook.
-        2) Assignment of names to specific cells, which will descibe and organize the data obtained from the two previous Sub procedures.
+        2) Assignment of header names to specific cells, which will descibe and organize the data obtained from the two previous Sub procedures.
         3) Variables CurrencyColumn, PercentageColumnA, and PercentageColumnB are defined.
-            * Used later to format the data obtained from the two previous Sub procedures.
-        4) Insertion of a table to organize the stock highlight information obtained in the previous Sub procedure.
+            * Used to further format the data obtained from the two previous Sub procedures.
+        4) Insertion of a table to organize the stock highlight information obtained in the StockCondensedDataAnalysis Sub procedure.
         5) Color formatting for the Yearly Change and Yearly Percent Change
             * For Loop created so that each row of Yearly Change and Yearly Percent Change will be evaluated one at a time, where:
                 * Green color will fill the Yearly Change and Yearly Percent Change cells when both values are greater than zero.
@@ -93,20 +95,25 @@ The stock data that served as the basis of this project is organized into an exc
         2) Calls the Sub procedure StockCondensedDataAnalysis
         3) Calls the Sub procedure NamingAndFormatting
     * This format allows for the entire data organization process to be completed by running the single macro MasterSwitch.
-       * To make the entire process slightly more interactive, the MasterSwitch macro was assigned to a control button on the first worksheet ("2018") of the workbook.
-           * The control button is titled "Organize Data" and once all of the data processing is complete in the entire workbook, the message "Data Is Organized!" will appear under the button.
+       * To make the entire process slightly more interactive, the message "Data Is Organized!" will appear once all data processing is complete in the entire workbook.
+
 
 ## Results ##
 
 ![image](https://github.com/10H-K/Stock_Analysis/assets/152930492/445ff59a-5f5b-4060-baad-b494887732de)
-    * The data processing results for the calendar year 2018.
+
 
 ![image](https://github.com/10H-K/Stock_Analysis/assets/152930492/609f6ca5-9f2e-4838-8073-b863afc8b65a)
-    * The data processing results for the calendar year 2019.
+
 
 ![image](https://github.com/10H-K/Stock_Analysis/assets/152930492/ddc2aecc-370c-4493-8917-4d9940c1b891)
-    * The data processing results for the calendar year 2020.
 
-## Discussion ##
 
-This project clearly demonstrates how incorporating automation of repetitive tasks through VBA can save time 
+## Limitations ##
+
+This project clearly demonstrates the usefulness of Excel automation through VBA. However, the objective of this project is primarily favorable for long-term investors in the stock market. Certain adjustments and additional features can make this VBA script suitable for short-term investors in the stock market, such as:
+
+1) An evaluation of the difference between the opening price and closing price on each trading day throughout the calendar year. While this will result in another large set of data points for each stock, these values can be further condensed by determining the average difference between the opening and closing prices, either on an annual basis or for each month within a calendar year.
+2) An evaluation of the difference between the highest intraday price and lowest intraday price on each trading day throughout the calendar year. Again, this will result in an additional large set of data points for each stock. However, this data can be further condesned as needed and ultimately be particularly useful for certain investors, like day-traders.
+
+These adjustments are examples of the many ways that the initial raw stock data can be manipulated to serve a variety of purposes. Overall, the main takeaway is that the VBA script can be adjusted based upon the needs of each investor. This represents a valuable combination of versatiltiy and automation.
