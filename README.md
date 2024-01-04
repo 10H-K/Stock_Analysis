@@ -93,6 +93,20 @@ The stock data that served as the basis of this project is organized into an exc
         2) Calls the Sub procedure StockCondensedDataAnalysis
         3) Calls the Sub procedure NamingAndFormatting
     * This format allows for the entire data organization process to be completed by running the single macro MasterSwitch.
+       * To make the entire process slightly more interactive, the MasterSwitch macro was assigned to a control button on the first worksheet ("2018") of the workbook.
+           * The control button is titled "Organize Data" and once all of the data processing is complete in the entire workbook, the message "Data Is Organized!" will appear under the button.
 
 ## Results ##
 
+![image](https://github.com/10H-K/Stock_Analysis/assets/152930492/445ff59a-5f5b-4060-baad-b494887732de)
+    * The data processing results for the calendar year 2018.
+
+![image](https://github.com/10H-K/Stock_Analysis/assets/152930492/609f6ca5-9f2e-4838-8073-b863afc8b65a)
+    * The data processing results for the calendar year 2019.
+
+![image](https://github.com/10H-K/Stock_Analysis/assets/152930492/ddc2aecc-370c-4493-8917-4d9940c1b891)
+    * The data processing results for the calendar year 2020.
+
+## Discussion ##
+
+This project clearly demonstrates how incorporating automation of repetitive tasks through VBA can save time 
